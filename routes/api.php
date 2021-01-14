@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
   return $request->user();
 });
-Route::middleware('test')->get('register', 'AuthController@index');
+Route::middleware('api.token')->get('register', 'AuthController@index');

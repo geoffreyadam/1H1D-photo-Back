@@ -16,6 +16,11 @@ class CheckAPIToken
      */
     public function handle(Request $request, Closure $next)
     {
-      return $next($request);
+      $requestData = $request->header();
+      if (isset($requestData['token'][0]) && $requestData['token'][0] === Config('api.apiToken')) {
+        return $next($request);
+      } else {
+        return response()->json(['error' => 'False API Token, contact an admin.'], 401);
+      }
     }
 }
