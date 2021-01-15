@@ -20,7 +20,7 @@ class CheckAPIToken
       if (isset($requestData['token'][0]) && $requestData['token'][0] === Config('api.apiToken')) {
         return $next($request);
       } else {
-        return response()->json(['error' => 'False API Token, contact an admin.'], 401);
+        return response()->json(['error' => 'False API Token, contact an admin.']);
       }
     }
 }

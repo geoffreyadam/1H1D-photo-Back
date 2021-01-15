@@ -17,12 +17,8 @@ class AuthController extends BaseController
 
     if ($validatedData->fails()) {
       return json_encode($validatedData->messages());
-      dump('nope');
     } else {
       
     }
-    dump($validatedData);
-    die;
-    return 'works';
   }
 }
