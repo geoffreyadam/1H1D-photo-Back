@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Dirape\Token\Token;
 
 class AuthController extends BaseController
 {
@@ -20,13 +21,13 @@ class AuthController extends BaseController
     if ($validatedData->fails()) {
       return json_encode(['errors' => $validatedData->messages()]);
     } else {
-      // dump($data['email']);
-      // die;
+      $token = (new Token())->Unique('users', 'token', 60);
       User::create([
         'email' => $data['email'],
         'password' => $data['password'],
+        'token' => $token
       ]);
-      return json_encode(['accepted' => 'Account created']);
+      return json_encode(['accepted' => 'Account created', 'token' => $token]);
     }
   }
 }
